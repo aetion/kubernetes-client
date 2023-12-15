@@ -17,6 +17,8 @@
 name: Build
 
 env:
+  MAVEN_SERVER_USERNAME: ${{ secrets.MAVEN_SERVER_USERNAME }}
+  MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
   MAVEN_ARGS: -B -C -V -ntp -DskipTests -Dhttp.keepAlive=false -e -s .github/workflows/settings.xml
 
 on:
@@ -48,16 +50,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Aetion Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: us-west-2
-      - name: Aetion Read Maven CI secrets
-        uses: aws-actions/aws-secretsmanager-get-secrets@v1     
-        with:                                                   
-          secret-ids: |                                           
-            maven
-          parse-json-secrets: true
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
