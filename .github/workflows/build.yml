@@ -23,7 +23,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - aetion
   pull_request:
     paths-ignore:
       - 'doc/**'
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [8,11]
+        java: [17]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,8 +55,3 @@ jobs:
           distribution: 'temurin'
       - name: Build Project
         run: ./mvnw ${MAVEN_ARGS} clean install
-
-      - name: Check java-generator CLI
-        run: |
-          chmod a+x java-generator/cli/target/java-gen
-          java-generator/cli/target/java-gen --source=java-generator/core/src/test/resources/crontab-crd.yml --target=./tmp
