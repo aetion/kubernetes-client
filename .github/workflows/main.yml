@@ -12,7 +12,7 @@ jobs:
     runs-on:
       group: dev
       labels: [self-hosted, dev]
-    name: Aetion Projects Service
+    name: Kubernetes Client
     steps:
       - name: Aetion Build & Deploy
         uses: aetion/actions@main
